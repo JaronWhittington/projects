@@ -1,15 +1,10 @@
 # markov_chains.py
-"""Volume II: Markov Chains.
-Jaron Whittington   
-Math 321
-Today
-"""
+# Jaron Whittington
 
 import numpy as np
 from numpy import linalg as la
 
 
-# Problem 1
 def random_chain(n):
     """Create and return a transition matrix for a random Markov chain with
     'n' states. This should be stored as an nxn NumPy array.
@@ -20,7 +15,6 @@ def random_chain(n):
     return newmark
 
 
-# Problem 2
 def forecast(days):
     """Forecast tomorrow's weather given that today is hot."""
     transition = np.array([[0.7, 0.6], [0.3, 0.4]])
@@ -55,7 +49,7 @@ def four_state_forecast(days):
     return forecast
 
 
-# Problem 4
+
 def steady_state(A, tol=1e-12, N=40):
     """Compute the steady state of the transition matrix A.
 
@@ -74,7 +68,7 @@ def steady_state(A, tol=1e-12, N=40):
     x = np.random.rand(n,1)
     curr = x / x.sum(axis = 0)
     count = 0
-    while count < 40:
+    while count < N:
         next = A@curr
         if la.norm(next - curr) < tol: return next
         curr = next
@@ -82,12 +76,9 @@ def steady_state(A, tol=1e-12, N=40):
     raise ValueError("A does not converge")
 
 
-# Problems 5 and 6
+
 class SentenceGenerator(object):
     """Markov chain creator for simulating bad English.
-
-    Attributes:
-        (what attributes do you need to keep track of?)
 
     Example:
         >>> yoda = SentenceGenerator("Yoda.txt")
