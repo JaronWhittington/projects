@@ -1,9 +1,8 @@
-#Midterm 1
+#Seasonal time series projection for box office revenue
 #Jaron Whittington
 
 #Get the Data
 
-#Q1 example from Dr. Grimshaw
 # webscraper for Q1 data from http://www.boxofficemojo.com/quarterly/?chart=byquarter&quarter=Q1
 
 # function that allows reading in data of the form $xxx,xxx,xxx.xx
@@ -66,7 +65,7 @@ q3boxoffice<-q3boxoffice[,1:2]
 names(q3boxoffice)<-c("year","gross")
 
 #Q4
-# webscraper for Q2 data from http://www.boxofficemojo.com/quarterly/?chart=byquarter&quarter=Q4
+# webscraper for Q4 data from http://www.boxofficemojo.com/quarterly/?chart=byquarter&quarter=Q4
 
 # data from webpage
 # Q4 box office url
