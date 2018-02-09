@@ -1,4 +1,4 @@
-#Start of Class Participation 2 for SLR
+#Simple Linear Regression on the diamond market in Singapore
 diamond <- read.table(header = F, text = "
                       0.3  D VS2  GIA  1302
 0.3  E VS1  GIA  1510
@@ -346,7 +346,8 @@ qplot(ln_Carat, ln_Price, data = diamond,
       xlab = "ln Diamond Carat",
       ylab = "ln Diamond Price (Singapore $)")
 
-#Predict price of a 1 carat diamond 
+#Predict price of a 1 carat diamond, in our current model that would be ln(1) which is just 0, so this will just
+#be the exponentiation of the y-intercept
 exp(9.13)
 #95% prediction interval at carat = 1 which means the ln of the Carat would be 0
 exp(predict(out.diamond, newdata = data.frame(ln_Carat = 0), interval = "prediction"))
@@ -373,10 +374,3 @@ summary(abs(diamond$Price   - exp(predict(out.diamond))))
 #The model predicts very well for lower values of Carat, and predits poorly for higher values of Carat.
 #This is because there are other factors in play, we are only examining Carat, only one of the 4 C's. 
 #Cut, for example, makes a huge difference in the price of the diamond, even for the same carat. 
-
-#Analysis Strenghts: Able to make accurate economic prediction, even when the data was originally non-linear
-#Weaknesses: Prediction based off only one variable, when there were more that could be analyzed and used for prediction.
-
-#Challenge: Housing prices vary by the square feet. This data is non-linear, but can be transformed. 
-#Transforming the data allows for some pretty accurate prediciton on the lower end, however there are 
-#many more factors in play, like neighborhood and accessories so it is not very accurate on the higher end.
