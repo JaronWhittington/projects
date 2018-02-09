@@ -1,4 +1,6 @@
-# Montgomery County Traffic Stops Data
+#Jaron Whittington
+#Montgomery County Traffic Stops Data
+#Random Forest model to predict how fast we can go over the speed limit and how to only get a warning 
 
 stops.full<-read.csv("http://data.montgomerycountymd.gov/api/views/4mse-ku6q/rows.csv?accessType=DOWNLOAD",
                      header=TRUE,as.is=TRUE)
@@ -8,7 +10,7 @@ last.year<-2017
 stops.full$AutoYear<-as.numeric(stops.full$Year)
 stops.full$Year<-as.numeric(substr(stops.full$Date.Of.Stop,7,10))
 stops.last<-subset(stops.full,Year==last.year)
-# delete the really big data set ... don't need to tie up the memory
+# delete the really big data set 
 rm(stops.full)
 
 # Create Month and Hour variables
@@ -88,7 +90,7 @@ hist(speed.last$speed, breaks = c(0,5,10,15,20,25,30,35,40,45,50,55,60,65), xlab
 #Thd data looks bimodal so we need a flexible model 
 #We want to find the 'best' explanatory variables 
 #We'll create a train and test data set to estimate and then test or model.
-set.seed(12) #Grimshaw always chooses 12, but we should be more thoughtful 
+set.seed(12) 
 train.rows<-sample(9773, 8000)
 speed.train <- speed.last[train.rows,]
 speed.test<-speed.last[-train.rows,]
@@ -122,12 +124,6 @@ importance(out.speed)
 varImpPlot(out.speed)
 #the most important effects are:
 #SubAgency, color, and time of day
-
-#Strenghts: very useful for straight prediction, able to make new predictions based off new data. 
-#Weaknesses: We can't go into the model and pinpoint the exact effect of each explanatory variable
-
-#challenge: Do police quotas effect how fast you can speed before you get pulled over? 
-#By using only sub agencies that have monthly quotas see if speed over the limit goes down as the day of the month gets larger
 
 #TICKET OR WARNING CLASSIFICATION
 
@@ -178,8 +174,4 @@ importance(out.ticket)
 varImpPlot(out.ticket)
 #the three most important were color, hour of the day, and year of the car
 
-#Strengths: Very powerful at predicting with explanatory variables
-#Weaknesses: Not able to dive into the model and disect it, can't see the exact effects of each explanatory variable
-#Challenge: Do certain factors increase the chance you'll get pulled over for not stopping a stop sign?
-#Response variable would be whether the violation was a stop sign violation
 
