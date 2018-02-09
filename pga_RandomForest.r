@@ -1,12 +1,10 @@
-#Jaron Whittington Stat 330 Section 2
-#Code for the Tree Models Homework
+#Jaron Whittington
+#Random Forest analysis on 2006 pga tour prize money per tournament
 
 #Read in the data 
 pga <- read.csv("http://www.stat.tamu.edu/~sheather/book/docs/datasets/pgatour2006.csv", header = T, as.is = T)
 str(pga)
 
-#The response variable is average Prize Money earned, which is quantitative
-#All explanatory variables are quantitavie 
 
 #Grab Tiger Woods to predict later
 tiger <- subset(pga, Name == "Tiger Woods")
@@ -37,11 +35,11 @@ out.pga <- randomForest(x = pga.train[-1], y = pga.train$PrizeMoney,
                         ntree = 200, mtry = 3, nodesize = 5)
 #Find the train and test RMSE's
 out.pga
-sqrt(1611387021)
-sqrt(1446050607)
+sqrt(1611387021) #train RMSE
+sqrt(1446050607) #test RMSE
 #subset Tiger to the variables used
 tiger <- tiger[c(3:12)]
-#make prediction
+#make prediction on Tiger Woods
 predict(out.pga, newdata = tiger)
 varImpPlot(out.pga)
 #3 most important variables: Birdie Conversion, Bounce Back, and GIR
